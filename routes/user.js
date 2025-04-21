@@ -4,51 +4,26 @@ const User = require('../Models/user.js')
 const passport = require('passport')
 const wrapAsync = require('../utils/wrapAsync')
 const { saveRedirectURL } = require('../middleware.js')
+const userController =require('../controller/users.js')
 
-//singup route
-router.get('/signup', (req, res) => {
-    res.render('users/signup.ejs')
-})
+//Singup route
+router
+    .route('/signup')
+    .get(userController.renderSignupForm)
+    .post(wrapAsync(userController.signup))
 
-router.post('/signup', wrapAsync(async (req, res) => {
-    try{
-        let {username, email, password} = req.body
-        const newUser = new User({email, username})
-        const registeredUser = await User.register(newUser, password)
-        req.login(registeredUser, (err) => {
-            if(err){
-                return next(err)
-            }
-            req.flash('success', `Welcome to Airbnb, ${username}`)
-            res.redirect('/listings')
-        })      
-    } catch(e){
-        req.flash('error', e.message)
-        res.redirect('/signup')
-    }
-}))
 
-//login route
-router.get('/login', (req, res) => {
-    res.render('users/login.ejs')
-})
+//Login route
+router
+    .route('/login')
+    .get( userController.renderLoginForm) 
+    .post(saveRedirectURL, 
+        passport.authenticate('local', {failureRedirect : '/login', failureFlash : true}), 
+        userController.login)
 
-router.post('/login',saveRedirectURL, passport.authenticate('local', {failureRedirect : '/login', failureFlash : true}), async (req, res) => {
-    let {username} = req.body
-    req.flash('success', `Welcome back, ${username}`)
-    let redirectURL = res.locals.redirectURL || '/listings'
-    res.redirect(redirectURL)
-})
 
-//logout route
-router.get('/logout', (req, res) => {
-    req.logout((err) => {
-        if(err){
-            return next(err)
-        }
-        req.flash('success', 'Logout Successfull')
-        res.redirect('/listings')
-    })
-})
+//Logout route
+router.get('/logout', userController.logout)
+
 
 module.exports = router

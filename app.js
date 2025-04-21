@@ -24,7 +24,7 @@ app.set('view engine', 'ejs')
 
 app.engine('ejs', ejsMate)
 
-const sessionOptions = {
+const sessionOptions = { 
     secret : 'mysecretcode',
     resave : false,
     saveUninitialized : true,
@@ -60,7 +60,6 @@ passport.use(new LocalStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
-
 app.use((req, res, next) => {
     res.locals.success = req.flash('success')
     res.locals.error = req.flash('error')
@@ -73,6 +72,11 @@ app.use('/listings', listingsRoute)
 app.use('/listings/:id/reviews', reviewsRoute)
 app.use('/', userRoute)
 
+//Root
+app.get('/', (req, res) => {
+    res.send("hi i am root ")
+})
+
 //Page not found
 app.all('*', (req, res, next) => {
     next(new ExpressError(404, "Page Not Found"))
@@ -82,11 +86,6 @@ app.all('*', (req, res, next) => {
 app.use((err, req, res, next) => {
     let { status = 500, message = "something went wrong" } = err
     res.render('error.ejs', { message })
-})
-
-//Root
-app.get('/', (req, res) => {
-    res.send("hi i am root ")
 })
 
 app.listen(3000, () => console.log("listening on port 3000"))
