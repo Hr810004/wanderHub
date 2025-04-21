@@ -1,0 +1,14 @@
+<% if(success && success.length){ %>
+
+    <div class="alert alert-success" style="text-align: center;" role="success">
+        <%= success %>
+    </div>     
+
+<% } %>
+<% if(error && error.length){ %>
+
+    <div class="alert alert-danger" style="text-align: center;" role="alert">
+        <%= error %>
+    </div>
+      
+<% } %>

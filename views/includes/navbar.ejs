@@ -1,0 +1,25 @@
+<nav class="flex justify-center items-center border-b-2 h-[75px]">
+    <div class="flex justify-center items-center w-full">
+      <a class=" w-full flex justify-center items-center text-[2rem] " href="#"><i class="fa-solid fa-hotel text-red-500"></i></a>
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button> -->
+      <div class="min-w-[90%] flex" style="justify-content:space-between; padding-right:2.5rem;" id="navbarNavAltMarkup">
+        <div class="flex justify-center items-center gap-8">
+          <a class="nav-link active" aria-current="page" href="/listings">Home</a>
+          <a class="nav-link" href="/listings">All Listings</a>
+          <a class="nav-link" href="/listings/new">Add new Listing</a>
+        </div>
+        <div class="flex justify-center items-center gap-8">
+          <% if (!currUser) { %>
+            <a class="nav-link active" aria-current="page" href="/signup">Signup</a>
+            <a class="nav-link" href="/login">Login</a>
+          <% } %>
+          <% if (currUser) { %>
+            <h5 class="mb-0"> <%=currUser.username%> </h5>
+            <a class="nav-link" href="/logout">Logout</a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </nav>
