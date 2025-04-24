@@ -31,9 +31,8 @@ const initDb = async () => {
     try {
         // Clear existing data
         const deleteResult = await Listing.deleteMany({});
-        console.log(`Deleted ${deleteResult.deletedCount} existing listings`);
 
-        const ownerId = process.env.DEFAULT_OWNER_ID || '68053af9676552b4fdafcf0e';
+        const ownerId = '680a55876cc590a48b05c9bd';
         const listingsWithOwner = initdata.data.map((obj) => ({
             ...obj,
             owner: ownerId

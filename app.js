@@ -98,6 +98,10 @@ app.use('/listings', listingsRoute)
 app.use('/listings/:id/reviews', reviewsRoute)
 app.use('/', userRoute)
 
+app.get('/', (req, res) => {
+    res.redirect('/listings')
+})
+
 //Page not found
 app.all('*', (req, res, next) => {
     next(new ExpressError(404, "Page Not Found"))

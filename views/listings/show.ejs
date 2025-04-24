@@ -6,7 +6,7 @@
             <img src="<%= list.image.url %>" alt="image" class="rounded-2xl w-full h-full object-cover">
         </div>
         <ul class="p-0 mt-4">
-            <p class="card-text"><i><%= list.owner.username %></i></p>
+            <p class="card-text"><i><u><%= list.owner.username %></u></i></p>
             <p class="card-text"></p><li><%= list.description %></li></p>
             <p class="card-text"></p><li>₹<%= list.price.toLocaleString("en-In") %></li></p>
             <p class="card-text"></p><li><%= list.location %></li></p>
@@ -14,7 +14,7 @@
         </ul>
 
         <% if(currUser && currUser._id.equals(list.owner._id)) { %>
-            <div class="flex gap-3">
+            <div class="flex gap-3 my-4">
                 <form action="/listings/<%= list._id%>/edit" method="get" >
                     <button class="bg-red-600 text-white rounded-md w-28 h-9 border-none hover:bg-red-500 transition-colors">Edit</button>
                 </form>
@@ -55,12 +55,12 @@
                 </form>
             <% } %>
 
-            <hr>
-            <h4 class="mt-4 mb-2">All Reviews</h4>
+            <hr class="mt-4">
+            <h4 class="my-4 mb-2">All Reviews</h4>
             <ul>
                 <%for(review of list.reviews){ %>
                     <div class="card col-10 ms-0 mb-3 flex-wrap">
-                        <div class="card-body">
+                        <div class="card-body" style="padding : 1rem; max-height: 10rem;">
                             <h5>@<%=review.author.username %></h5>
                             <p class="starability-result" data-rating="<%=review.rating%>"/> 
                             <p><%=review.comment %></p>

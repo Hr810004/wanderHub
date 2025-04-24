@@ -1,6 +1,6 @@
 <% layout('/layouts/boilerplate') -%>
 
-    <div class="h-full p-8 " style="max-width: 66%;">
+    <div class="h-full p-8 " style="max-width: 50%; margin : 2.5rem auto; border: 1px solid rgb(179, 173, 173); border-radius: 0.5rem;">
         <h3 class="my-4">Create New Listing</h3>
         <form action="/listings" method="post" enctype="multipart/form-data">
             <label for="title">Title</label><br>
@@ -10,13 +10,13 @@
             <textarea required  type="text" name="listing[description]" id="description" class="border-2 h-20 w-[98%] rounded-md px-2 mb-3"></textarea>
             <br>
             <label for="image">Upload Image</label><br>
-            <input type="file" name="listing[image]" id="image" class="border-2 h-10 w-[98%] rounded-md px-2 mb-3" required>
+            <input type="file" name="listing[image]" id="image" class="border-2 h-10 w-[98%] rounded-md px-2 mb-3 py-1" required>
             <br>
             <label for="price">Price</label>
             <label for="country" class="absolute left-1/2">Country</label><br>
-            <input required  type="text" name="listing[price]" placeholder="enter price" id="price" class="border-2 h-10 w-[46%] rounded-md px-2 mb-3">
+            <input required  type="text" name="listing[price]" placeholder="enter price" id="price" class="border-2 h-10 rounded-md px-2 mb-3">
     
-            <input required type="text" name="listing[country]" placeholder="enter country" id="country" class="border-2 h-10 w-[46%] absolute left-1/2 rounded-md px-2 mb-3">
+            <input required type="text" name="listing[country]" placeholder="enter country" id="country" class="border-2 h-10  absolute left-1/2 rounded-md px-2 mb-3">
             <br>
             <label for="location">Location</label><br>
             <input required type="text" name="listing[location]" placeholder="enter location" id="location" class="border-2 w-[98%] h-10 rounded-[0.2rem] px-2 mb-3">
