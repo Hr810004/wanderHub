@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV != 'production'){
+    require('dotenv').config()
+}
+
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
@@ -6,6 +10,7 @@ const methodoverride = require('method-override')
 const ejsMate = require('ejs-mate')
 const ExpressError = require('./utils/ExpressError.js')
 const session = require('express-session')
+const MongoStore = require('connect-mongo')
 const flash = require('connect-flash')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
@@ -15,17 +20,28 @@ const reviewsRoute = require('./routes/review.js')
 const userRoute = require('./routes/user.js')
 
 const User = require('./Models/user.js')
-const user = require('./Models/user.js')
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/airbnb"
+// const MONGO_URL = "mongodb://127.0.0.1:27017/airbnb"
+const dburl = process.env.ATLASDB_URL   
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
 app.engine('ejs', ejsMate)
 
+const store = MongoStore.create({
+    mongoUrl : dburl,
+    crypto : {
+        secret : process.env.SECRET,
+    },
+    touchAfter : 24 * 3600,
+})
+
+store.on('error', () => console.log("Erro in mongo session", err))
+
 const sessionOptions = { 
-    secret : 'mysecretcode',
+    store,
+    secret : process.env.SECRET,
     resave : false,
     saveUninitialized : true,
     cookie : {
@@ -40,14 +56,26 @@ app.use('/src', express.static('src'));
 // app.use(express.static(path.join(__dirname, 'src')))
 
 
-
 //connect to DB
 main().then((res) => console.log("connected to database"))
-    .catch((err) => console.log(err))
+    .catch((err) => {
+        console.log("Error connecting to database:", err.message);
+        process.exit(1);
+    });
 
 async function main() {
-    await mongoose.connect(MONGO_URL)
+    try {
+        await mongoose.connect(dburl, {
+            serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 10s
+            socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
+        });
+    } catch (err) {
+        console.error("MongoDB connection error:", err);
+        throw err;
+    }
 }
+
+
 
 
 app.use(session(sessionOptions))
@@ -71,11 +99,6 @@ app.use((req, res, next) => {
 app.use('/listings', listingsRoute)
 app.use('/listings/:id/reviews', reviewsRoute)
 app.use('/', userRoute)
-
-//Root
-app.get('/', (req, res) => {
-    res.send("hi i am root ")
-})
 
 //Page not found
 app.all('*', (req, res, next) => {

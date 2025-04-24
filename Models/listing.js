@@ -1,36 +1,44 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema  
 
+const categories = ['All', 'Beach', 'Mountain', 'City', 'Countryside', 'Forest', 'Lake', 'Island', 'Desert', 'Safari'];
 
-const listningSchema = new Schema({
-    title:{
-        type : String,
-        required : true,
-        default : 'untitled listing'
+const listingSchema = new Schema({
+    title: {
+        type: String,
+        required: true,
+        default: 'untitled listing'
     },
-    description :String,
-    image : {
-        type : String,
-        default : "https://images.unsplash.com/photo-1735707370784-9b3e8dd9e8b1?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
-        set: (v) => v===""
-            ? "https://images.unsplash.com/photo-1735707370784-9b3e8dd9e8b1?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            : v.url,
+    description: String,
+    image: {
+        filename: String,
+        url: String,
     },
-    price : Number,
-    location : String,
-    country : String,
-    reviews : [
+    price: Number,
+    location: String,
+    country: String,
+    category: {
+        type: String,
+        enum: categories,
+        default: 'All'
+    },
+    reviews: [
         {
-            type : Schema.Types.ObjectId,
-            ref : "Review",
+            type: Schema.Types.ObjectId,
+            ref: "Review",
         },
     ],
-    owner : {
-        type : Schema.Types.ObjectId,
-        ref : "User",
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
     }
 })
 
+// Create and export the model
+const Listing = mongoose.model('Listing', listingSchema)
 
-const Listing = mongoose.model('Listing', listningSchema)
-module.exports = Listing
+// Export both the model and categories
+module.exports = {
+    Listing,
+    categories
+}

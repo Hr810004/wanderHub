@@ -2,13 +2,21 @@
 
     <div class="w-full h-full p-8 ">
     <h3>Edit list :</h3>
-    <form action="/listings/<%= list._id%>?_method=PUT" method="post">
+    <form action="/listings/<%= list._id%>?_method=PUT" method="post" enctype="multipart/form-data">
         <label for="title">Title</label><br>
         <input type="text" name="listing[title]" value="<%=list.title%>" class="border-2 h-10 w-[98%] rounded-md px-2 mb-3" id="title">
         <br>
 
         <label for="description">Description</label><br>
         <textarea type="text" name="listing[description]" id="description" class="border-2 h-20 w-[98%] rounded-md px-2 mb-3"><%=list.description%></textarea>
+        <br>
+
+        Original image
+        <img src="<%=originalImageUrl%>" width="300" height="250"/>
+        <br>
+
+        <label for="image">Upload New Image</label><br>
+        <input type="file" name="listing[image]" class="border-2 h-10 w-[98%] rounded-md px-2 mb-3">
         <br>
 
         <label for="price">Price</label>

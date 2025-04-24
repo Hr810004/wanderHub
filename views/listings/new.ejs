@@ -1,16 +1,16 @@
 <% layout('/layouts/boilerplate') -%>
 
-    <div class="w-full h-full p-8 ">
+    <div class="h-full p-8 " style="max-width: 66%;">
         <h3 class="my-4">Create New Listing</h3>
-        <form action="/listings" method="post" >
+        <form action="/listings" method="post" enctype="multipart/form-data">
             <label for="title">Title</label><br>
             <input required type="text" name="listing[title]" id="title" placeholder="enter title" class="border-2 h-10 w-[98%] rounded-md px-2 mb-3">
             <br>
             <label for="description">Description</label><br>
             <textarea required  type="text" name="listing[description]" id="description" class="border-2 h-20 w-[98%] rounded-md px-2 mb-3"></textarea>
             <br>
-            <label for="image">Image Link</label><br>
-            <input type="text" name="listing[image]" id="image" placeholder="enter image URL/Link" class="border-2 h-10 w-[98%] rounded-md px-2 mb-3">
+            <label for="image">Upload Image</label><br>
+            <input type="file" name="listing[image]" id="image" class="border-2 h-10 w-[98%] rounded-md px-2 mb-3" required>
             <br>
             <label for="price">Price</label>
             <label for="country" class="absolute left-1/2">Country</label><br>

@@ -1,9 +1,10 @@
-const Listing = require('./Models/listing.js')
+const { Listing } = require('./Models/listing.js')
 const Review  = require('./Models/reviews.js')
 const {listingSchema, reviewSchema} = require('./schema.js')
 const ExpressError = require('./utils/ExpressError.js')
 
 module.exports.isLoggedIn = (req, res, next) => {
+    // console.log("here is the issue")
     if(!req.isAuthenticated()){
         //redirect url
         req.session.redirectURL = req.originalUrl
