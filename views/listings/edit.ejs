@@ -1,35 +1,174 @@
 <% layout('/layouts/boilerplate') -%>
 
-    <div class="w-full h-full p-8 ">
-    <h3>Edit list :</h3>
-    <form action="/listings/<%= list._id%>?_method=PUT" method="post" enctype="multipart/form-data">
-        <label for="title">Title</label><br>
-        <input type="text" name="listing[title]" value="<%=list.title%>" class="border-2 h-10 w-[98%] rounded-md px-2 mb-3" id="title">
-        <br>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+  }
 
-        <label for="description">Description</label><br>
-        <textarea type="text" name="listing[description]" id="description" class="border-2 h-20 w-[98%] rounded-md px-2 mb-3"><%=list.description%></textarea>
-        <br>
+  .bg-with-overlay {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fHx8&auto=format&fit=crop&w=2070&q=80');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    position: relative;
+    padding-top: 100px;   /* Gap from navbar */
+    padding-bottom: 100px; /* Gap before footer */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
 
-        Original image
-        <img src="<%=originalImageUrl%>" width="300" height="250"/>
-        <br>
+  .form-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(4px);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid rgb(179, 173, 173);
+    width: 50%;
+    max-width: 700px;
+    animation: fadeSlideUp 0.6s ease-out;
+    position: relative;
+    z-index: 1;
+  }
 
-        <label for="image">Upload New Image</label><br>
-        <input type="file" name="listing[image]" class="border-2 h-10 w-[98%] rounded-md px-2 mb-3">
-        <br>
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-        <label for="price">Price</label>
-        <label for="country" class="absolute left-1/2">Country</label><br>
-        <input type="number" name="listing[price]"  value="<%=list.price%>" id="price" class="border-2 h-10 w-[46%] rounded-md px-2 mb-3"">
-        <input type="text" name="listing[location]"  value="<%=list.location%>" id="country" class="border-2 h-10 w-[46%] absolute left-1/2 rounded-md px-2 mb-3">
-        <br>
+  form {
+    display: grid;
+    gap: 16px;
+    margin-top: 20px;
+  }
 
-        <label for="location">Location</label><br>
-        <input type="text" name="listing[country]"  value="<%=list.country%>" id="location" class="border-2 w-[98%] h-10 rounded-[0.2rem] px-2 mb-3">
-        <br>
+  form label {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    display: block;
+  }
 
-        <button class="bg-red-600 text-white rounded-lg w-16 h-7 border-none hover:bg-red-500">Edit</button>
+  form input, form textarea {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  form input[type="file"] {
+    padding: 8px;
+  }
+
+  form textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .input-group {
+    display: flex;
+    gap: 10px;
+  }
+
+  .input-group input {
+    width: 48%;
+  }
+
+  .image-preview {
+    max-width: 300px;
+    max-height: 250px;
+    margin-bottom: 20px;
+  }
+
+  button {
+    background-color: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    width: 100%;
+  }
+
+  button:hover {
+    background-color: #ef4444;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #1f2937;
+    text-align: center;
+  }
+
+  .form-footer {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .form-footer a {
+    color: #dc2626;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .form-footer a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="bg-with-overlay">
+  <div class="form-container">
+    <h3>Edit Listing</h3>
+
+    <form action="/listings/<%= list._id %>?_method=PUT" method="post" enctype="multipart/form-data">
+      
+      <label for="title">Title</label>
+      <input required type="text" name="listing[title]" value="<%= list.title %>" class="border-2 h-10 w-[98%] rounded-md px-2 mb-3" id="title">
+
+      <label for="description">Description</label>
+      <textarea required name="listing[description]" id="description" class="border-2 h-20 w-[98%] rounded-md px-2 mb-3"><%= list.description %></textarea>
+
+      <div class="image-preview">
+        <strong>Original Image:</strong>
+        <img src="<%= originalImageUrl %>" alt="Original Image" width="300" height="250" class="rounded-md" />
+      </div>
+
+      <label for="image">Upload New Image</label>
+      <input type="file" name="listing[image]" class="border-2 h-10 w-[98%] rounded-md px-2 mb-3">
+
+      <div class="input-group">
+        <div class="input-container">
+          <label for="price">Price</label>
+          <input required type="number" name="listing[price]" value="<%= list.price %>" id="price" class="border-2 h-10 rounded-md px-2 mb-3">
+        </div>
+
+        <div class="input-container">
+          <label for="country">Country</label>
+          <input required type="text" name="listing[country]" value="<%= list.country %>" id="country" class="border-2 h-10 rounded-md px-2 mb-3">
+        </div>
+      </div>
+
+      <label for="location">Location</label>
+      <input required type="text" name="listing[location]" value="<%= list.location %>" id="location" class="border-2 w-[98%] h-10 rounded-[0.2rem] px-2 mb-3">
+
+      <button type="submit">Edit Listing</button>
     </form>
-    </div>
 
+    <div class="form-footer">
+      <p>Back to <a href="/listings">Listings</a></p>
+    </div>
+  </div>
+</div>

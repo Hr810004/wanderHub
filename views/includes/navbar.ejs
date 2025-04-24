@@ -1,26 +1,33 @@
 <nav class="flex justify-center items-center border-b-2 h-[75px]">
-    <div class="flex items-center w-full" style="justify-content: space-between; margin-right: 2rem; max-width: 85vw;">
-      <div class="flex justify-center items-center gap-2">
-        <a class=" w-full flex justify-center items-end text-[2rem] " href="/listings"><i class="fa-solid fa-hotel text-red-500"></i></a>
-        <a href="/listings" class="no-underline text-red-500"><b>WanderHub</b></a>
-      </div>
-   
-      <div class="flex justify-center items-center gap-4" >
-        <a class="nav-link" href="/listings">Explore</a>
-        <a class="nav-link" style="opacity : 50%" href="/listings/new">Create Experiances</a>
-      </div>
-      <div class="flex justify-center items-center gap-8">
-        <% if (!currUser) { %>
-          <a class="nav-link active" aria-current="page" href="/signup"><b>Signup</b></a>
-          <a class="nav-link" href="/login"><b>Login</b></a>
-        <% } %>
-        <% if (currUser) { %>
-          <span class="nav-link mb-0 flex justify-center items-center"
-              style="font-size: 1.2rem; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; color: black;">
-            <%= currUser.username %>
-          </span>
-          <a class="nav-link mb-0 flex justify-center items-center bg-black text-white" style="border: 1px solid black; border-radius: 20px; width: auto; height: 2.5rem; padding: 0 1rem; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);" href="/logout">Logout</a>
-        <% } %>
-      </div>
+  <div class="flex items-center w-full" style="justify-content: space-between; margin-right: 2rem; max-width: 85vw;">
+    
+    <!-- Logo and Links -->
+    <div class="flex justify-center items-center gap-2">
+      <a class="w-full flex justify-center items-end text-[2rem]" href="/listings">
+        <i class="fa-solid fa-hotel text-red-500"></i>
+      </a>
+      <a href="/listings" class="no-underline text-red-500"><b>WanderHub</b></a>
     </div>
-  </nav>
+
+    <!-- Explore and Create Experiences Links -->
+    <div class="flex justify-center items-center gap-4">
+      <a class="nav-link" href="/listings">Explore</a>
+      <a class="nav-link" href="/listings/new">Create Experiences</a>
+    </div>
+
+    <!-- Authentication Links (Signup, Login, Logout) -->
+    <div class="flex justify-center items-center gap-8">
+      <% if (!currUser) { %>
+        <a class="nav-link active signup" aria-current="page" href="/signup"><b>Signup</b></a>
+        <a class="nav-link login" href="/login"><b>Login</b></a>
+      <% } %>
+      <% if (currUser) { %>
+        <span class="nav-link mb-0 flex justify-center items-center"
+            style="font-size: 1.2rem; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; color: black;">
+          <%= currUser.username %>
+        </span>
+        <a class="nav-link mb-0 flex justify-center items-center logout-btn" href="/logout">Logout</a>
+      <% } %>
+    </div>
+  </div>
+</nav>

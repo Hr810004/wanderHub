@@ -16,7 +16,7 @@ const LocalStrategy = require('passport-local')
 const listingsRoute = require('./routes/listing.js')
 const reviewsRoute = require('./routes/review.js')
 const userRoute = require('./routes/user.js')
-
+const mapRoute = require('./routes/map.js')
 const User = require('./Models/user.js')
 
 // const MONGO_URL = "mongodb://127.0.0.1:27017/airbnb"
@@ -97,7 +97,7 @@ app.use((req, res, next) => {
 app.use('/listings', listingsRoute)
 app.use('/listings/:id/reviews', reviewsRoute)
 app.use('/', userRoute)
-
+app.use("/map", mapRoute);
 app.get('/', (req, res) => {
     res.redirect('/listings')
 })

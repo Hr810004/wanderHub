@@ -10,28 +10,70 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        /* color: white;S */
         text-align: center;
         margin-bottom: 2rem;
         position: relative;
+        opacity: 0;
+        animation: fadeIn 2s ease-out forwards, scaleImage 2s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
     }
 
     .hero-content {
         margin-bottom: 6rem;
         color: white;
+        animation: slideUp 1.5s ease-out forwards;
+    }
+
+    @keyframes slideUp {
+        0% {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
 
     .hero-title {
         font-size: 3rem;
         font-weight: 700;
         margin-bottom: 1rem;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        animation: fadeInTitle 1.5s ease-out forwards;
+    }
+
+    @keyframes fadeInTitle {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
     }
 
     .hero-subtitle {
         font-size: 1.2rem;
         margin-bottom: 2rem;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        animation: fadeInSubtitle 2s ease-out forwards;
+    }
+
+    @keyframes fadeInSubtitle {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
     }
 
     .search-container {
@@ -41,13 +83,25 @@
         transform: translateX(-50%);
         width: 90%;
         max-width: 850px;
+        animation: slideUpSearch 1.8s ease-out forwards;
+    }
+
+    @keyframes slideUpSearch {
+        0% {
+            transform: translate(-50%, 20px);
+            opacity: 0;
+        }
+        100% {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
     }
 
     .search-bar {
         background: white;
         padding: 0.75rem;
         border-radius: 30px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         display: flex;
         align-items: center;
         gap: 1rem;
@@ -123,10 +177,16 @@
         padding: 2rem 0;
         margin: 2rem 0;
         scrollbar-width: none;
+        animation: fadeInCategories 2s ease-out forwards;
     }
 
-    .category-scroll::-webkit-scrollbar {
-        display: none;
+    @keyframes fadeInCategories {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
     }
 
     .category-item {
@@ -157,6 +217,19 @@
         overflow: hidden;
         transition: transform 0.3s ease;
         margin-bottom: 1.5rem;
+        opacity: 0;
+        animation: fadeInListing 1.5s ease-out forwards;
+    }
+
+    @keyframes fadeInListing {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .listing-card:hover {
@@ -210,7 +283,18 @@
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         z-index: 1000;
     }
+     @keyframes scaleImage {
+        0% {
+            transform: scale(1.1); /* Start slightly zoomed in */
+            opacity: 0;
+        }
+        100% {
+            transform: scale(1); /* End at normal scale */
+            opacity: 1;
+        }
+    }
 </style>
+
 
 <div class="hero-section">
     <div class="hero-content">
@@ -292,7 +376,11 @@
     </div>
 </div>
 
+
+
 <div class="map-toggle">
+  <a href="/map" class="text-white">
     <i class="fas fa-map"></i>
+  </a>
 </div>
 

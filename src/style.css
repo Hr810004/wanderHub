@@ -1,6 +1,7 @@
 .navbar{
     height: 5rem;
     background-color: white;
+    border-radius: 10%;
 }
 
 .fa-solid{

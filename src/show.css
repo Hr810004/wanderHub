@@ -1,0 +1,68 @@
+/* Fade-up Animation */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-up {
+    animation: fadeUp 1s ease-in-out;
+}
+
+.fade-up:nth-child(even) {
+    animation-delay: 0.5s;
+}
+
+/* Review Card Styling */
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card h5 {
+    font-size: 1.2rem;
+}
+
+.card p {
+    color: #333;
+}
+
+.card .starability-result {
+    margin: 0.5rem 0;
+}
+
+
+/* Buttons */
+button {
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+/* Buttons inside form */
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+/* Hover Effects for Buttons */
+button:hover {
+    background-color: #f56565;
+    color: white;
+}
