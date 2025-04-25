@@ -1,386 +1,435 @@
 <% layout('/layouts/boilerplate') -%>
 
 <style>
-    .hero-section {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fHx8&auto=format&fit=crop&w=2070&q=80');
-        background-size: cover;
-        background-position: center;
-        height: 70vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        margin-bottom: 2rem;
-        position: relative;
-        opacity: 0;
-        animation: fadeIn 2s ease-out forwards, scaleImage 2s ease-out forwards;
-    }
+.hero-section {
+  background: rgba(23, 11, 11, 0.703); /* A slight overlay for better text contrast */
+  position: relative;
+  height: 70vh;
+  top: -15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeIn 2s ease-out forwards, scaleImage 2s ease-out forwards;
+}
 
-    @keyframes fadeIn {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures video covers the entire section */
+  z-index: 0; /* Video is in the background */
+}
 
-    .hero-content {
-        margin-bottom: 6rem;
-        color: white;
-        animation: slideUp 1.5s ease-out forwards;
-    }
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Dark overlay with opacity */
+  z-index: 1; /* Ensure the overlay is above the video but below the text */
+}
 
-    @keyframes slideUp {
-        0% {
-            transform: translateY(20px);
-            opacity: 0;
-        }
-        100% {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
-    .hero-title {
-        font-size: 3rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        animation: fadeInTitle 1.5s ease-out forwards;
-    }
+.hero-content {
+  margin-bottom: 6rem;
+  color: white;
+  animation: slideUp 1.5s ease-out forwards;
+  z-index: 2; /* Ensure the text appears above the overlay */
+}
 
-    @keyframes fadeInTitle {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
+@keyframes slideUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
-    .hero-subtitle {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        animation: fadeInSubtitle 2s ease-out forwards;
-    }
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: fadeInTitle 1.5s ease-out forwards;
+}
 
-    @keyframes fadeInSubtitle {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
+@keyframes fadeInTitle {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
-    .search-container {
-        position: absolute;
-        bottom: -25px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90%;
-        max-width: 850px;
-        animation: slideUpSearch 1.8s ease-out forwards;
-    }
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  animation: fadeInSubtitle 2s ease-out forwards;
+}
 
-    @keyframes slideUpSearch {
-        0% {
-            transform: translate(-50%, 20px);
-            opacity: 0;
-        }
-        100% {
-            transform: translate(-50%, 0);
-            opacity: 1;
-        }
-    }
+@keyframes fadeInSubtitle {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
-    .search-bar {
-        background: white;
-        padding: 0.75rem;
-        border-radius: 30px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
+.search-container {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 850px;
+  animation: slideUpSearch 1.8s ease-out forwards;
+  z-index: 3;
+}
 
-    .search-input-container {
-        flex-grow: 1;
-        position: relative;
-    }
+@keyframes slideUpSearch {
+  0% {
+    transform: translate(-50%, 20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
 
-    .search-input {
-        width: 100%;
-        padding: 0.75rem 1rem 0.75rem 3rem;
-        border: none;
-        border-radius: 25px;
-        background-color: #f7f7f7;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        color: black;
-    }
+.search-bar {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.418); /* Enhanced shadow for depth */
+  background: white;
+  padding: 0.75rem;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 
-    .search-input:focus {
-        outline: none;
-        background-color: #fff;
-        box-shadow: 0 0 0 2px #FF385C;
-        color: black;
-    }
+}
 
-    .search-icon {
-        position: absolute;
-        left: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #717171;
-    }
+.search-input-container {
+  flex-grow: 1;
+  position: relative;
+}
 
-    .search-button {
-        background: #FF385C;
-        color: white;
-        border: none;
-        padding: 0.75rem 1.5rem;
-        border-radius: 25px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  border: none;
+  border-radius: 25px;
+  background-color: #f7f7f7;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  color: black;
+}
 
-    .search-button:hover {
-        background: #E31C5F;
-        transform: translateY(-1px);
-    }
+.search-input:focus {
+  outline: none;
+  background-color: #fff;
+  box-shadow: 0 0 0 2px #ff385c;
+  color: black;
+}
 
-    .search-item {
-        padding: 0.75rem 1.5rem;
-        border-radius: 25px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #717171;
+}
 
-    .search-item:hover {
-        background-color: #f7f7f7;
-    }
+.search-button {
+  background: #ff385c;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-    .search-item.active {
-        background-color: #FF385C;
-        color: white;
-    }
+.search-button:hover {
+  background: #e31c5f;
+  transform: translateY(-1px);
+}
 
-    .category-scroll {
-        display: flex;
-        overflow-x: auto;
-        gap: 2rem;
-        padding: 2rem 0;
-        margin: 2rem 0;
-        scrollbar-width: none;
-        animation: fadeInCategories 2s ease-out forwards;
-    }
+.search-item {
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-    @keyframes fadeInCategories {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
+.search-item:hover {
+  background-color: #f7f7f7;
+}
 
-    .category-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-width: 100px;
-        cursor: pointer;
-        padding: 0.5rem;
-        border-bottom: 2px solid transparent;
-        transition: all 0.3s ease;
-        color: #000;
-        text-decoration: none;
-    }
+.search-item.active {
+  background-color: #ff385c;
+  color: white;
+}
 
-    .category-item:hover {
-        border-bottom: 2px solid #FF385C;
-        color: #000;
-    }
+.category-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 2rem;
+  padding: 2rem 0;
+  margin: 2rem 0;
+  scrollbar-width: none;
+  animation: fadeInCategories 2s ease-out forwards;
+}
 
-    .category-item.active {
-        border-bottom: 2px solid #FF385C;
-        color: #000;
-    }
+@keyframes fadeInCategories {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
-    .listing-card {
-        border-radius: 12px;
-        overflow: hidden;
-        transition: transform 0.3s ease;
-        margin-bottom: 1.5rem;
-        opacity: 0;
-        animation: fadeInListing 1.5s ease-out forwards;
-    }
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+  color: #000;
+  text-decoration: none;
+}
 
-    @keyframes fadeInListing {
-        0% {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+.category-item:hover {
+  border-bottom: 2px solid #ff385c;
+  color: #000;
+}
 
-    .listing-card:hover {
-        transform: scale(1.02);
-    }
+.category-item.active {
+  border-bottom: 2px solid #ff385c;
+  color: #000;
+}
 
-    .listing-image {
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
-        border-radius: 12px;
-    }
+.listing-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease; /* smooth transition on hover */
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeInListing 1.5s ease-out forwards;
+}
 
-    .listing-info {
-        padding: 1rem;
-    }
+@keyframes fadeInListing {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    .listing-title {
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-    }
+/* Hover effect for listing card */
+.listing-card:hover {
+  transform: scale(1.05); /* scale the card slightly */
+}
 
-    .listing-location {
-        color: #717171;
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-    }
+.listing-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 1s ease-in-out; /* smooth transition for the image */
+}
 
-    .listing-price {
-        color: #FF385C;
-        font-weight: 600;
-        font-size: 1.1rem;
-    }
+/* Hover effect for listing image */
+.listing-card:hover .listing-image {
+  transform: scale(1.05); /* scale the image slightly when the card is hovered */
+}
 
-    .rating {
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
-    }
+.listing-info {
+  padding: 1rem;
+}
 
-    .map-toggle {
-        position: fixed;
-        bottom: 2rem;
-        right: 2rem;
-        background: black;
-        color: white;
-        padding: 1rem;
-        border-radius: 50%;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        z-index: 1000;
-    }
-     @keyframes scaleImage {
-        0% {
-            transform: scale(1.1); /* Start slightly zoomed in */
-            opacity: 0;
-        }
-        100% {
-            transform: scale(1); /* End at normal scale */
-            opacity: 1;
-        }
-    }
+.listing-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.listing-location {
+  color: #717171;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.listing-price {
+  color: #ff385c;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.map-toggle {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: black;
+  color: white;
+  padding: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+@keyframes scaleImage {
+  0% {
+    transform: scale(1.1); /* Start slightly zoomed in */
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1); /* End at normal scale */
+    opacity: 1;
+  }
+}
+
 </style>
 
-
 <div class="hero-section">
-    <div class="hero-content">
-        <h1 class="hero-title">Find your next stay</h1>
-        <p class="hero-subtitle">Search deals on hotels, homes, and much more...</p>
-    </div>
-    <div class="search-container">
-        <form action="/listings" method="GET" class="search-bar">
-            <div class="search-input-container">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" name="search" placeholder="Search for a place to stay..." class="search-input" value="<%= typeof search !== 'undefined' ? search : '' %>">
-            </div>
-            <button type="submit" class="search-button">
-                <i class="fas fa-search me-2"></i>
-                Search
-            </button>
-        </form>
-    </div>
+  <video autoplay muted loop class="video-background">
+    <source src="/videos/clip.mp4" type="video/mp4" />
+  </video>
+
+  <div class="hero-content">
+    <h1 class="hero-title">Find your next stay</h1>
+    <p class="hero-subtitle">Search deals on hotels, homes, and much more...</p>
+  </div>
+
+  <div class="search-container">
+    <form action="/listings" method="GET" class="search-bar">
+      <div class="search-input-container">
+        <i class="fas fa-search search-icon"></i>
+        <input
+          type="text"
+          name="search"
+          placeholder="Search for a place to stay..."
+          class="search-input"
+          value="<%= typeof search !== 'undefined' ? search : '' %>"
+        />
+      </div>
+      <button type="submit" class="search-button">
+        <i class="fas fa-search me-2"></i>
+        Search
+      </button>
+    </form>
+  </div>
 </div>
 
 <div class="container">
-    <div class="category-scroll">
-        <% for(let cat of categories){ %>
-            <a href="/listings?category=<%=cat%><%= search ? `&search=${search}` : '' %>" style="text-decoration: none; color: inherit;">
-                <div class="category-item <%= cat === selectedCategory ? 'active' : '' %>">
-                    <i class="fas fa-<%= 
-                        cat === 'All' ? 'home' : 
-                        cat === 'Beach' ? 'umbrella-beach' : 
-                        cat === 'Mountain' ? 'mountain' : 
-                        cat === 'City' ? 'city' : 
-                        cat === 'Countryside' ? 'home' : 
-                        cat === 'Forest' ? 'tree' : 
-                        cat === 'Lake' ? 'water' : 
-                        cat === 'Island' ? 'umbrella-beach' : 
-                        cat === 'Desert' ? 'sun' : 
-                        cat === 'Safari' ? 'paw' : 
-                        'home' 
-                    %> text-2xl mb-2"></i>
-                    <span><%=cat%></span>
-                </div>
-            </a>
-        <% } %>
-
-    </div>
-
-    <hr style="margin-bottom: 5rem;">
-
-
-    <% if (allListings.length === 0) { %>
-        <div class="text-center py-8">
-            <h3 class="text-xl font-semibold text-gray-700">No listings found</h3>
-            <p class="text-gray-500 mt-2">Try adjusting your search or category filters</p>
-            <a href="/listings" class="inline-block mt-4 text-red-500 hover:text-red-600">Clear all filters</a>
-        </div>
+  <div class="category-scroll">
+    <% for(let cat of categories){ %>
+    <a
+      href="/listings?category=<%=cat%><%= search ? `&search=${search}` : '' %>"
+      style="text-decoration: none; color: inherit"
+    >
+      <div
+        class="category-item <%= cat === selectedCategory ? 'active' : '' %>"
+      >
+        <i
+          class="fas fa-<%= cat === 'All' ? 'home' : cat === 'Beach' ? 'umbrella-beach' : cat === 'Mountain' ? 'mountain' : cat === 'City' ? 'city' : cat === 'Countryside' ? 'home' : cat === 'Forest' ? 'tree' : cat === 'Lake' ? 'water' : cat === 'Island' ? 'umbrella-beach' : cat === 'Desert' ? 'sun' : cat === 'Safari' ? 'paw' : 'home' %> text-2xl mb-2"
+        ></i>
+        <span><%=cat%></span>
+      </div>
+    </a>
     <% } %>
+  </div>
 
-    <div class="row">
-        <% for(let listing of allListings){ %>
-            <div class="col-md-4 col-lg-3 mb-4">
-                <div class="listing-card">
-                    <a href="/listings/<%=listing._id%><%= search ? `?search=${search}` : '' %>" class="text-decoration-none text-dark">
-                        <img src="<%=listing.image.url%>" class="listing-image" alt="<%=listing.title%>">
-                        <div class="listing-info">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <h3 class="listing-title"><%=listing.title%></h3>
-                                <div class="rating">
-                                    <i class="fas fa-star text-warning"></i>
-                                    <span>4.8</span>
-                                </div>
-                            </div>
-                            <p class="listing-location"><%=listing.location%>, <%=listing.country%></p>
-                            <p class="listing-location">Available Now</p>
-                            <p class="listing-price">₹<%=listing.price.toLocaleString("en-In")%> night</p>
-                        </div>
-                    </a>
-                </div>
+  <hr style="margin-bottom: 5rem" />
+
+  <% if (allListings.length === 0) { %>
+  <div class="text-center py-8">
+    <h3 class="text-xl font-semibold text-gray-700">No listings found</h3>
+    <p class="text-gray-500 mt-2">
+      Try adjusting your search or category filters
+    </p>
+    <a
+      href="/listings"
+      class="inline-block mt-4 text-red-500 hover:text-red-600"
+      >Clear all filters</a
+    >
+  </div>
+  <% } %>
+
+  <div class="row">
+    <% for(let listing of allListings){ %>
+    <div class="col-md-4 col-lg-3 mb-4">
+      <div class="listing-card">
+        <a
+          href="/listings/<%=listing._id%><%= search ? `?search=${search}` : '' %>"
+          class="text-decoration-none text-dark"
+        >
+          <img
+            src="<%=listing.image.url%>"
+            class="listing-image"
+            alt="<%=listing.title%>"
+          />
+          <div class="listing-info">
+            <div class="d-flex justify-content-between align-items-start">
+              <h3 class="listing-title"><%=listing.title%></h3>
+              <div class="rating">
+                <i class="fas fa-star text-warning"></i>
+                <span>4.8</span>
+              </div>
             </div>
-        <% } %>
+            <p class="listing-location">
+              <%=listing.location%>, <%=listing.country%>
+            </p>
+            <p class="listing-location">Available Now</p>
+            <p class="listing-price">
+              ₹<%=listing.price.toLocaleString("en-In")%> night
+            </p>
+          </div>
+        </a>
+      </div>
     </div>
+    <% } %>
+  </div>
 </div>
-
-
 
 <div class="map-toggle">
   <a href="/map" class="text-white">
     <i class="fas fa-map"></i>
   </a>
 </div>
-

@@ -6,10 +6,12 @@
   border-bottom: 2px solid #ddd;
   height: 75px;
   background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.418); /* Enhanced shadow for depth */
   position: sticky;
   top: 0;
   z-index: 1000;
+  border-radius: 0 0 20px 20px; /* Rounded bottom corners */
+  padding: 0 1rem; /* Add padding for some inner space */
 }
 
 .navbar .nav-link {
@@ -20,42 +22,102 @@
   margin-right: 15px;
   font-weight: 500;
   transition: all 0.3s ease;
+  border-radius: 12px; /* Rounded corners for nav links */
 }
 
 /* Hover effect for all nav links (except for logout) */
 .nav-link:hover {
   color: #ff385c;
   background-color: rgba(255, 56, 92, 0.1);
-  /* Light pink background */
   border-radius: 20px;
   transform: scale(1.05);
 }
 
-/* Styling for the logout button with background color and border radius */
+/* Styling for the signup, login, and logout buttons with a modern gradient background */
 .signup,
 .login,
 .logout-btn {
-  background-color: black;
+  background: linear-gradient(45deg, #ff385c, #ff6b81); /* Gradient background */
   color: white;
   border-radius: 20px;
   padding: 6px 25px;
   font-size: 15px;
   text-decoration: none;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-/* Hover effect for the logout button */
+/* Hover effect for the buttons */
 .signup:hover,
-.login:hover,.logout-btn:hover {
-  background-color: #ff385c;
-  /* Change to pink on hover */
+.login:hover,
+.logout-btn:hover {
+  background: linear-gradient(45deg, #ff6b81, #ff385c); /* Reverse gradient for hover */
   cursor: pointer;
   color: white;
-  transform: scale(1.05);
-  /* Slight zoom effect */
+  transform: scale(1.05); /* Slight zoom effect */
 }
 
 /* Additional specific styling for the 'Create Experiences' link */
 .nav-link[style*="opacity: 50%"]:hover {
   opacity: 1;
+}
+
+/* Styling for the navbar content */
+.navbar .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 85vw; /* Limit width for responsiveness */
+}
+
+/* Logo and links styling */
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar .logo a {
+  text-decoration: none;
+  color: red;
+  font-weight: bold;
+  font-size: 1.75rem;
+}
+
+.navbar .logo i {
+  font-size: 2rem;
+  color: red;
+}
+
+/* Links section styling */
+.navbar .links {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Authentication section styling */
+.navbar .auth-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Navbar links adjustments for responsiveness */
+@media (max-width: 768px) {
+  .navbar .content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar .links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .navbar .auth-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }

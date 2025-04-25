@@ -51,6 +51,9 @@ const sessionOptions = {
 app.use(express.urlencoded({ extended: true }))
 app.use(methodoverride("_method"))
 app.use('/src', express.static('src'));
+// Serve static files from the "videos" folder in the root directory
+app.use('/videos', express.static(path.join(__dirname, 'videos')));
+
 // app.use(express.static(path.join(__dirname, 'src')))
 
 

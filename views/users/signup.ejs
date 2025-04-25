@@ -1,65 +1,141 @@
 <% layout('/layouts/boilerplate') -%>
 
 <style>
+  body, html {
+    margin: 0;
+    padding: 0;
+  }
+
+  .bg-with-overlay {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      url('https://valueadzvisas.com/blogpic/large/1528803020City-Merlion-Park-Singapore-Wallpaper-1920x1080.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 90vh;
+    position: relative;
+    padding-top: 50px;   /* Gap from navbar */
+    padding-bottom: 100px; /* Gap before footer */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .form-container {
+    color: white;
+    background-color: rgba(45, 44, 44, 0.351); /* semi-transparent for the blur effect */
+    backdrop-filter: blur(5px); /* applying the blur effect */
+    padding: 2rem;
+    border-radius: 20px;  /* rounding corners for neumorphism effect */
+    border: 1px solid white; /* soft border matching the background */
+    width: 50%;
+    max-width: 500px;
+    animation: fadeSlideUp 0.6s ease-out;
+    position: relative;
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1), -8px -8px 16px rgba(255, 255, 255, 0.2); /* neumorphism shadow */
+    z-index: 1;
+  }
+
   @keyframes fadeSlideUp {
-    0% {
+    from {
       opacity: 0;
       transform: translateY(20px);
     }
-    100% {
+    to {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
-  .fade-slide-up {
-    animation: fadeSlideUp 0.8s ease-out;
+  form {
+    display: grid;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  form label {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: white;
+    display: block;
+  }
+
+  form input {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.855); /* subtle background color for inputs */
+    color: #333; /* dark text for readability */
+    transition: background-color 0.3s ease; /* smoother interaction */
+  }
+
+  form input:focus {
+    background-color: rgba(255, 255, 255, 0.9); /* slightly more visible on focus */
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* subtle focus effect */
+  }
+
+  button {
+    background-color: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    width: 100%;
+  }
+
+  button:hover {
+    background-color: #ef4444;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: white;
+    text-align: center;
+  }
+
+  .form-footer {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .form-footer a {
+    color: #dc2626;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .form-footer a:hover {
+    text-decoration: underline;
   }
 </style>
 
-<div class="min-h-[80vh] flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-  <div class="border rounded-lg fade-slide-up" style="min-width: 35vw; min-height: 50vh; margin-top: 5rem;">
-    <div>
-      <h1 class="text-center text-3xl font-extrabold text-gray-900">
-        Create your account
-      </h1>
-    </div>
-    <form action="/signup" method="POST" class="space-y-4" style="width: 80%; margin-top: 2.5rem; margin-left: 3.5rem;">
-      <div class="rounded-md shadow-sm -space-y-px">
-        <div>
-          <label for="username">Username</label>
-          <input required type="text" name="username" id="username"
-            class="rounded-md appearance-none mb-4 relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
-            placeholder="Username">
-        </div>
-        <div>
-          <label for="email">Email</label>
-          <input required type="email" name="email" id="email"
-            class="rounded-md appearance-none mb-4 relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
-            placeholder="Email">
-        </div>
-        <div>
-          <label for="password">Password</label>
-          <input required type="password" name="password" id="password"
-            class="rounded-md appearance-none mb-4 relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm"
-            placeholder="Password">
-        </div>
-      </div>
+<div class="bg-with-overlay">
+  <div class="form-container">
+    <h3>Create your account</h3>
 
-      <div>
-        <button type="submit"
-          class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-          Sign up
-        </button>
-      </div>
+    <form action="/signup" method="POST" class="space-y-4">
+      <label for="username">Username :</label>
+      <input required type="text" name="username" id="username" class="border-2 h-10 rounded-md px-2 mb-3" placeholder="Enter your username">
+
+      <label for="email">Email :</label>
+      <input required type="email" name="email" id="email" class="border-2 h-10 rounded-md px-2 mb-3" placeholder="Enter your email">
+
+      <label for="password">Password :</label>
+      <input required type="password" name="password" id="password" class="border-2 h-10 rounded-md px-2 mb-3" placeholder="Enter your password">
+
+      <button type="submit">Sign up</button>
     </form>
-    <div class="text-center">
-      <p class="text-sm text-gray-600">
-        Already have an account?
-        <a href="/login" class="font-medium text-red-600 hover:text-red-500">
-          Sign in
-        </a>
-      </p>
+
+    <div class="form-footer">
+      <p>Already have an account? <a href="/login">Sign in</a></p>
     </div>
   </div>
 </div>

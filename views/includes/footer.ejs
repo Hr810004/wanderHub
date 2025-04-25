@@ -1,15 +1,96 @@
 <footer>
-    <div class="flex flex-wrap justify-center items-center h-32 text-center bg-slate-200 h-[140px]" >
-        <div class="w-full text-[1.2rem] " >
-            <a href="https://www.facebook.com"><i class="fa-brands fa-facebook mr-3 "></i></a>
-            <a href="https://www.instagram.com"><i class="fa-brands fa-instagram mr-3 "></i></a>
-            <a href="https://www.linkedin.com"><i class="fa-brands fa-linkedin-in mr-3 "></i></a>
-    
+    <div class="footer-content">
+        <!-- Social Media Links -->
+        <div class="social-media-links">
+            <a href="https://www.facebook.com"><i class="fa-brands fa-facebook mr-3"></i></a>
+            <a href="https://www.instagram.com"><i class="fa-brands fa-instagram mr-3"></i></a>
+            <a href="https://www.linkedin.com"><i class="fa-brands fa-linkedin-in mr-3"></i></a>
         </div>
-        <div class="text-center  w-full">&copy; WanderHub Private Limited</div>
-        <div class="w-full ">
-            <a  class="no-underline text-black hover:underline" href="/privacy">Privacy</a>
-            <a class="no-underline text-black hover:underline" href="/terms">Terms</a>
+
+        <!-- Copyright Text -->
+        <div class="copyright-text">
+            &copy; WanderHub Private Limited
+        </div>
+
+        <!-- Privacy & Terms Links -->
+        <div class="privacy-terms-links">
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
         </div>
     </div>
 </footer>
+
+
+<style>
+ html, body {
+      height: 100%; /* Ensure full height */
+      margin: 0;
+      display: flex;
+      flex-direction: column; /* Arrange content vertically */
+    }
+
+    /* Content that takes up available space */
+    .content {
+      flex: 1; /* This makes sure the content takes up the available space */
+      padding: 20px;
+    }
+
+    /* Footer Styling */
+    footer {
+      width: 100%;
+      background-color: #f7f7f7; /* Light background */
+      color: #333; /* Dark text */
+      padding: 2rem 0; /* Padding for spacing */
+      text-align: center;
+      border-top: 1px solid #ddd; /* Optional: Add a border for visual separation */
+    }
+
+    /* Center and wrap the content in the footer */
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Social Media Links Styling */
+    .social-media-links {
+      font-size: 1.5rem;
+    }
+
+    .social-media-links a {
+      color: #ff385c; /* Accent color */
+      transition: color 0.3s ease;
+      margin: 0 1rem;
+    }
+
+    .social-media-links a:hover {
+      color: #e31c5f; /* Darker hover color */
+    }
+
+    /* Copyright Text Styling */
+    .copyright-text {
+      font-size: 0.9rem;
+      color: #717171; /* Light gray */
+      margin-top: 1rem;
+    }
+
+    /* Privacy and Terms Links Styling */
+    .privacy-terms-links {
+      margin-top: 1rem;
+    }
+
+    .privacy-terms-links a {
+      margin: 0 1rem;
+      font-size: 1rem;
+      color: #333; /* Default text color */
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .privacy-terms-links a:hover {
+      color: #ff385c; /* Accent color on hover */
+      text-decoration: underline;
+    }
+  </style>
+</style>
