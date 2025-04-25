@@ -1,330 +1,374 @@
 <% layout('/layouts/boilerplate') -%>
 
 <style>
-.hero-section {
-  background: rgba(23, 11, 11, 0.703); /* A slight overlay for better text contrast */
-  position: relative;
-  height: 70vh;
-  top: -15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin-bottom: 2rem;
-  opacity: 0;
-  animation: fadeIn 2s ease-out forwards, scaleImage 2s ease-out forwards;
-}
-
-.video-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensures video covers the entire section */
-  z-index: 0; /* Video is in the background */
-}
-
-.hero-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* Dark overlay with opacity */
-  z-index: 1; /* Ensure the overlay is above the video but below the text */
-}
-
-@keyframes fadeIn {
-  0% {
+  .hero-section {
+    background: rgba(
+      23,
+      11,
+      11,
+      0.703
+    ); /* A slight overlay for better text contrast */
+    position: relative;
+    height: 70vh;
+    top: -15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 2rem;
     opacity: 0;
+    animation: fadeIn 2s ease-out forwards, scaleImage 2s ease-out forwards;
   }
-  100% {
+
+  .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures video covers the entire section */
+    z-index: 0; /* Video is in the background */
+  }
+
+  .hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay with opacity */
+    z-index: 1; /* Ensure the overlay is above the video but below the text */
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .hero-content {
+    margin-bottom: 6rem;
+    color: white;
+    animation: slideUp 1.5s ease-out forwards;
+    z-index: 2; /* Ensure the text appears above the overlay */
+  }
+
+  @keyframes slideUp {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInTitle 1.5s ease-out forwards;
+  }
+
+  @keyframes fadeInTitle {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    animation: fadeInSubtitle 2s ease-out forwards;
+  }
+
+  @keyframes fadeInSubtitle {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .search-container {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 850px;
+    animation: slideUpSearch 1.8s ease-out forwards;
+    z-index: 3;
+  }
+
+  @keyframes slideUpSearch {
+    0% {
+      transform: translate(-50%, 20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+  }
+
+  .search-bar {
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.418); /* Enhanced shadow for depth */
+    background: white;
+    padding: 0.75rem;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .search-input-container {
+    flex-grow: 1;
+    position: relative;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 3rem;
+    border: none;
+    border-radius: 25px;
+    background-color: #f7f7f7;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    color: black;
+  }
+
+  .search-input:focus {
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 0 2px #ff385c;
+    color: black;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #717171;
+  }
+
+  .search-button {
+    background: #ff385c;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .search-button:hover {
+    background: #e31c5f;
+    transform: translateY(-1px);
+  }
+
+  .search-item {
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .search-item:hover {
+    background-color: #f7f7f7;
+  }
+
+  .search-item.active {
+    background-color: #ff385c;
+    color: white;
+  }
+
+  .category-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 2rem;
+    padding: 2rem 0;
+    margin: 2rem 0;
+    scrollbar-width: none;
+    animation: fadeInCategories 2s ease-out forwards;
+  }
+
+  @keyframes fadeInCategories {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100px;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    color: #000;
+    text-decoration: none;
+  }
+  @keyframes iconFadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .category-icon {
+    opacity: 0;
+    animation: iconFadeIn 0.5s ease-out forwards;
+  }
+
+  .category-item:hover {
+    border-bottom: 2px solid #ff385c;
+    color: #000;
+  }
+
+  .category-item.active {
+    border-bottom: 2px solid #ff385c;
+    color: #000;
+  }
+
+  .listing-card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease; /* smooth transition on hover */
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeInListing 1.5s ease-out forwards;
+  }
+
+  @keyframes fadeInListing {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Hover effect for listing card */
+  .listing-card:hover {
+    transform: scale(1.05); /* scale the card slightly */
+  }
+
+  .listing-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 1s ease-in-out; /* smooth transition for the image */
+  }
+
+  /* Hover effect for listing image */
+  .listing-card:hover .listing-image {
+    transform: scale(
+      1.05
+    ); /* scale the image slightly when the card is hovered */
+  }
+
+  .listing-info {
+    padding: 1rem;
+  }
+
+  .listing-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .listing-location {
+    color: #717171;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .listing-price {
+    color: #ff385c;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .map-toggle {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    background: black;
+    color: white;
+    padding: 1rem;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    text-align: center;
+  }
+
+  .map-toggle .tooltip-text {
+    visibility: hidden;
+    width: max-content;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 6px 10px;
+    border-radius: 6px;
+    position: absolute;
+    bottom: 120%; /* Above the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-size: 0.9rem;
+  }
+
+  .map-toggle:hover .tooltip-text {
+    visibility: visible;
     opacity: 1;
   }
-}
 
-.hero-content {
-  margin-bottom: 6rem;
-  color: white;
-  animation: slideUp 1.5s ease-out forwards;
-  z-index: 2; /* Ensure the text appears above the overlay */
-}
-
-@keyframes slideUp {
-  0% {
-    transform: translateY(20px);
-    opacity: 0;
+  @keyframes scaleImage {
+    0% {
+      transform: scale(1.1); /* Start slightly zoomed in */
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1); /* End at normal scale */
+      opacity: 1;
+    }
   }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.hero-title {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  animation: fadeInTitle 1.5s ease-out forwards;
-}
-
-@keyframes fadeInTitle {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.hero-subtitle {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  animation: fadeInSubtitle 2s ease-out forwards;
-}
-
-@keyframes fadeInSubtitle {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.search-container {
-  position: absolute;
-  bottom: -25px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 850px;
-  animation: slideUpSearch 1.8s ease-out forwards;
-  z-index: 3;
-}
-
-@keyframes slideUpSearch {
-  0% {
-    transform: translate(-50%, 20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translate(-50%, 0);
-    opacity: 1;
-  }
-}
-
-.search-bar {
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.418); /* Enhanced shadow for depth */
-  background: white;
-  padding: 0.75rem;
-  border-radius: 30px;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-
-}
-
-.search-input-container {
-  flex-grow: 1;
-  position: relative;
-}
-
-.search-input {
-  width: 100%;
-  padding: 0.75rem 1rem 0.75rem 3rem;
-  border: none;
-  border-radius: 25px;
-  background-color: #f7f7f7;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  color: black;
-}
-
-.search-input:focus {
-  outline: none;
-  background-color: #fff;
-  box-shadow: 0 0 0 2px #ff385c;
-  color: black;
-}
-
-.search-icon {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #717171;
-}
-
-.search-button {
-  background: #ff385c;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.search-button:hover {
-  background: #e31c5f;
-  transform: translateY(-1px);
-}
-
-.search-item {
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.search-item:hover {
-  background-color: #f7f7f7;
-}
-
-.search-item.active {
-  background-color: #ff385c;
-  color: white;
-}
-
-.category-scroll {
-  display: flex;
-  overflow-x: auto;
-  gap: 2rem;
-  padding: 2rem 0;
-  margin: 2rem 0;
-  scrollbar-width: none;
-  animation: fadeInCategories 2s ease-out forwards;
-}
-
-@keyframes fadeInCategories {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.category-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 100px;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-bottom: 2px solid transparent;
-  transition: all 0.3s ease;
-  color: #000;
-  text-decoration: none;
-}
-
-.category-item:hover {
-  border-bottom: 2px solid #ff385c;
-  color: #000;
-}
-
-.category-item.active {
-  border-bottom: 2px solid #ff385c;
-  color: #000;
-}
-
-.listing-card {
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.3s ease; /* smooth transition on hover */
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  animation: fadeInListing 1.5s ease-out forwards;
-}
-
-@keyframes fadeInListing {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Hover effect for listing card */
-.listing-card:hover {
-  transform: scale(1.05); /* scale the card slightly */
-}
-
-.listing-image {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 12px;
-  transition: transform 1s ease-in-out; /* smooth transition for the image */
-}
-
-/* Hover effect for listing image */
-.listing-card:hover .listing-image {
-  transform: scale(1.05); /* scale the image slightly when the card is hovered */
-}
-
-.listing-info {
-  padding: 1rem;
-}
-
-.listing-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.listing-location {
-  color: #717171;
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-}
-
-.listing-price {
-  color: #ff385c;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-.rating {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.map-toggle {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  background: black;
-  color: white;
-  padding: 1rem;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-}
-
-@keyframes scaleImage {
-  0% {
-    transform: scale(1.1); /* Start slightly zoomed in */
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1); /* End at normal scale */
-    opacity: 1;
-  }
-}
-
 </style>
 
 <div class="hero-section">
@@ -359,18 +403,19 @@
 
 <div class="container">
   <div class="category-scroll">
-    <% for(let cat of categories){ %>
+    <% for(let i = 0; i < categories.length; i++) { let cat = categories[i]; %>
     <a
-      href="/listings?category=<%=cat%><%= search ? `&search=${search}` : '' %>"
+      href="/listings?category=<%= cat %><%= search ? `&search=${search}` : '' %>"
       style="text-decoration: none; color: inherit"
     >
       <div
         class="category-item <%= cat === selectedCategory ? 'active' : '' %>"
       >
         <i
-          class="fas fa-<%= cat === 'All' ? 'home' : cat === 'Beach' ? 'umbrella-beach' : cat === 'Mountain' ? 'mountain' : cat === 'City' ? 'city' : cat === 'Countryside' ? 'home' : cat === 'Forest' ? 'tree' : cat === 'Lake' ? 'water' : cat === 'Island' ? 'umbrella-beach' : cat === 'Desert' ? 'sun' : cat === 'Safari' ? 'paw' : 'home' %> text-2xl mb-2"
+          class="fas fa-<%= cat === 'All' ? 'home' : cat === 'Beach' ? 'umbrella-beach' : cat === 'Mountain' ? 'mountain' : cat === 'City' ? 'city' : cat === 'Countryside' ? 'home' : cat === 'Forest' ? 'tree' : cat === 'Lake' ? 'water' : cat === 'Island' ? 'umbrella-beach' : cat === 'Desert' ? 'sun' : cat === 'Safari' ? 'paw' : 'home' %> text-2xl mb-2 category-icon"
+          style="animation-delay: <%= i * 0.15 %>s"
         ></i>
-        <span><%=cat%></span>
+        <span><%= cat %></span>
       </div>
     </a>
     <% } %>
@@ -429,6 +474,7 @@
 </div>
 
 <div class="map-toggle">
+  <span class="tooltip-text">View Map</span>
   <a href="/map" class="text-white">
     <i class="fas fa-map"></i>
   </a>
